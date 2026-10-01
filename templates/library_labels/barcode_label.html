@@ -1,8 +1,11 @@
 {% extends './_base.html' %}
 {% block body %}
+	{% if codabar_image %}
 	<div id="image">
-		<img src='data:image/png;base64,{{ codabar_image }}' style="max-width:100%"	>
+		<img src='data:image/png;base64,{{ codabar_image }}' style="max-width:100%">
+		<a href='data:image/png;base64,{{ codabar_image }}' download="{{ download_name }}">download</a>
 	</div>
+	{% endif %}
 
         <div id="div_form_">
             <form method="post">

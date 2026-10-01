@@ -32,16 +32,16 @@ class BarcodeForm(forms.Form):
 class SSIDForm(forms.Form):
    ssid_text = forms.CharField(label="SSID", max_length=30)
    password_text = forms.CharField(label="Password", max_length=30)
-   notice1_text = forms.CharField(label="Notice(line 1)", max_length=30, initial="Return with case,")
-   notice2_text = forms.CharField(label="Notice(line 2)", max_length=30, initial="charger, and cable")
+   notice1_text = forms.CharField(label="Notice(line 1)", max_length=50, required=False, initial="Return with case, carger, and cable")
+   notice2_text = forms.CharField(label="Notice(line 2)", max_length=50, required=False, initial="")
    ssid_fontsize = forms.IntegerField(label="SSID Font Size", initial=96)
-   ssid_fontfamily = forms.CharField(label="SSID Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
-   password_fontsize = forms.IntegerField(label="Password Font Size", initial=96)
-   password_fontfamily = forms.CharField(label="Password Font Family", max_length=30, initial="LiberationSans-Bold.ttf")
-   notice1_fontsize = forms.IntegerField(label="Notice(line 1) Font Size", initial=96)
-   notice1_fontfamily = forms.CharField(label="Notice(line 1) Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
-   notice2_fontsize = forms.IntegerField(label="Notice(line 2) Font Size", initial=96)
-   notice2_fontfamily = forms.CharField(label="Notice(line 2) Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
+   ssid_fontfamily = forms.CharField(label="SSID Font Family", max_length=60, initial="LiberationSans-Regular.ttf")
+   password_fontsize = forms.IntegerField(label="Password Font Size", initial=108)
+   password_fontfamily = forms.CharField(label="Password Font Family", max_length=60, initial="LiberationSans-Bold.ttf")
+   notice1_fontsize = forms.IntegerField(label="Notice(line 1) Font Size", initial=76)
+   notice1_fontfamily = forms.CharField(label="Notice(line 1) Font Family", max_length=60, initial="LiberationSans-Regular.ttf")
+   notice2_fontsize = forms.IntegerField(label="Notice(line 2) Font Size", initial=76)
+   notice2_fontfamily = forms.CharField(label="Notice(line 2) Font Family", max_length=60, initial="LiberationSans-Regular.ttf")
 
 class InsertTemplateForm(forms.ModelForm):
     class Meta:

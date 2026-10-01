@@ -348,11 +348,13 @@ class BarcodeLabelCreate(FormView):
         context_data["form"] = form
 
         context_data["codabar_image"] = codabar_image
-        context_data["barcode_number"] = clean_data["barcode_number"], 
-        context_data["show_barcode_number"] = clean_data["show_barcode_number"], 
-        context_data["show_startstop"] = clean_data["show_startstop"], 
-        context_data["start_code"] = clean_data["start_code"], 
-        context_data["stop_code"] = clean_data["stop_code"], 
+        context_data["barcode_number"] = clean_data["barcode_number"] 
+        context_data["download_name"] = "barcode_{}.png".format(clean_data["barcode_number"].replace(" ",""))
+
+        context_data["show_barcode_number"] = clean_data["show_barcode_number"] 
+        context_data["show_startstop"] = clean_data["show_startstop"] 
+        context_data["start_code"] = clean_data["start_code"] 
+        context_data["stop_code"] = clean_data["stop_code"] 
         context_data["above_bar1_text"] = clean_data["above_bar1_text"]
         context_data["above_bar2_text"] = clean_data["above_bar2_text"]
         context_data["barcode_height"] = clean_data["barcode_height"]
@@ -397,8 +399,11 @@ class SSIDLabelCreate(FormView):
 
         context_data = self.get_context_data()
         context_data["form"] = form
+
         context_data["ssid_image"] = ssid_image
         context_data["ssid_text"] = clean_data["ssid_text"]
+        context_data["download_name"] = "ssid_{}.png".format(clean_data["ssid_text"].replace(" ",""))
+
         context_data["password_text"] = clean_data["password_text"]
         context_data["notice1_text"] = clean_data["notice1_text"]
         context_data["notice2_text"] = clean_data["notice2_text"]
