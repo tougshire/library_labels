@@ -31,6 +31,7 @@ def make_ssid_label(
             img_height = img_height + notice1_fontsize
         if notice2_text > "":
             img_height = img_height + notice2_fontsize
+        img_height = img_height * 10 
 
         init_img_width = 10000
 
@@ -70,6 +71,7 @@ def make_ssid_label(
             try:
                 font_notice2_text = ImageFont.truetype(notice2_fontfamily, size=notice2_fontsize)
             except IOError:
+                print("some kind of error with notice2_text=", notice2_text)
                 font_notice2_text = ImageFont.load_default()
 
             bbox = init_draw.textbbox((0,0), notice2_text, font=font_notice2_text)
@@ -87,7 +89,7 @@ def make_ssid_label(
 
         draw = ImageDraw.Draw(img)
 
-        text_y = ssid_fontsize
+        text_y = 0
 
         try:
             font_ssid_text = ImageFont.truetype(ssid_fontfamily, size=ssid_fontsize)
@@ -101,7 +103,7 @@ def make_ssid_label(
 
         draw.text((text_x, text_y ), ssid_text, fill="black", font=font_ssid_text, align="center")
 
-        text_y = text_y + password_fontsize
+        text_y = text_y + ssid_fontsize
 
         try:
             font_password_text = ImageFont.truetype(password_fontfamily, size=password_fontsize)
@@ -115,8 +117,9 @@ def make_ssid_label(
 
         draw.text((text_x, text_y ), password_text, fill="black", font=font_password_text, align="center")
 
+        text_y = text_y + password_fontsize
+
         if notice1_text > "":
-            text_y = text_y + notice1_fontsize
 
             try:
                 font_notice1_text = ImageFont.truetype(notice1_fontfamily, size=notice1_fontsize)
@@ -130,8 +133,9 @@ def make_ssid_label(
 
             draw.text((text_x, text_y ), notice1_text, fill="black", font=font_notice1_text, align="center")
 
+            text_y = text_y + notice1_fontsize
+
         if notice2_text > "":
-            text_y = text_y + notice2_fontsize
 
             try:
                 font_notice2_text = ImageFont.truetype(notice2_fontfamily, size=notice2_fontsize)
@@ -143,7 +147,11 @@ def make_ssid_label(
 
             text_x = (img_width - text_width) // 2
 
+            print("***** Drawing at ", text_x, text_y, notice2_text)
+
             draw.text((text_x, text_y ), notice2_text, fill="black", font=font_notice2_text, align="center")
+
+            text_y = text_y + notice2_fontsize
 
         byio = BytesIO()
         img.save(byio, format="jpeg")
