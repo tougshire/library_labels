@@ -1,0 +1,125 @@
+body {print-color-adjust: exact;}
+
+#div_insert_container {
+    width:5.5in;
+    border:5px solid black;
+    text-align:center;
+}
+#div_insert_container > div {
+    text-align: center;
+    border-bottom:1px solid black;
+}
+#div_insert_container > div {
+    display:flex;
+}
+#div_library_id_connection_info {
+    font-size:1.1em;
+}
+#div_library_id {
+    width:50%;
+    border:1px solid black;
+}
+#div_ssid_password {
+    width:50%;
+    border:1px solid black;
+}
+#please_return_label {
+    width:50%;
+    border:1px solid black;
+}
+#div_codabar {
+    justify-content: center;
+}
+#div_codabar_image > img {
+    height: 0.5in;
+    width: 1.82in;
+}
+#div_connection_label_image > img {
+    height: 0.5in;
+    width: 1.82in;
+}
+#div_main_instructions {
+    min-height:3.5in;
+}
+#div_main_instructions div {
+    text-align:left;
+}
+#div_instructions_section1 {
+    width:55%;
+}
+#div_instructions_section2 {
+    width:45%;
+    border-left: 1px solid black;
+}
+#div_instructions_section2 > div {
+    border-bottom:1px solid black;
+}
+#div_device_instructions  {
+    justify-content: left;
+}
+#div_device_instructions_text  {
+    transform:rotate(180deg);
+    text-align: left;
+    width:60%;
+}
+#div_device_instructions_photo {
+    text-align:center;
+    width:40%;
+}
+#div_device_instructions_photo > img {
+    height:1in;
+}
+#div_agreement {
+    background-color:red;
+    color:white;
+    text-align:right;
+}
+#div_agreement > div {
+    text-align:left;
+}
+
+#div_wifi2go_logo  {
+    text-align:right;
+}
+#div_wifi2go_logo > img {
+    width:1.66in;
+    height:0.73in;   
+}
+
+
+.labels {
+    margin-top:.5in;
+    display:flex;
+}
+
+.labels > div {
+    width:2in;
+    border:5px solid black;
+    text-align:center;
+
+}
+
+.labels  img {
+	width:2in;
+	height:.5in;
+}
+
+div.separator {
+    min-height: .25in;
+}
+
+#div_form {
+    margin-top:1in;
+}
+form > div {
+    display:flex;
+}
+form > div > div {
+    padding-right:1em;
+}
+
+@media print {
+    #div_form {
+        display:none;
+    }
+}

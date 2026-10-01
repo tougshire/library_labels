@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+    <head>
+        <title>Library Labels</title>
+
+	<link rel="stylesheet" href="{% static "library_labels/stylesheet_base.css" %}?cid=1va9u807">
+        {% if insert_template.stylesheet_filename %}
+          <link rel="stylesheet" href="{% static "library_labels/"|add:insert_template.stylesheet_filename %}">
+        {% endif %}
+
+
+    </head>
+    <body>
+    {% if insert_template.template_filename %}
+      {% with template="library_labels/"|add:insert_template.template_filename %}
+        {% include template %}
+        {% endwith %}
+    {% endif %}
+
+    {% include "./insert_form.html" %}
+
+    </body>
+</html>

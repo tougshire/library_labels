@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+    <head>
+        <title>Library Labels</title>
+        <link rel="stylesheet" href="{% static 'library_labels/library_labels.css'" %}">
+    </head>
+    <body>
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.errors }}
+                {% csrf_token %}
+                <div>
+                    {{ form.template_name.label_tag }}{{ form.template_name }}
+                </div>
+                <div>{{ form.instructions_photo.label_tag }}{{ form.instructions_photo }}</div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

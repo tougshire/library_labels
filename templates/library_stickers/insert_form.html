@@ -1,0 +1,22 @@
+        <div id="div_form">
+            <form method="post">
+                {{ form.media }}
+                {{ form.errors }}
+                {% csrf_token %}
+                <div>
+                    <div>{{ form.start_code.label_tag }}{{ form.start_code }}</div>
+                    <div>{{ form.stop_code.label_tag }}{{ form.stop_code }}</div>
+                </div>
+                <div>{{ form.barcode_number.label_tag }}{{ form.barcode_number }}</div>
+                <div>
+                    <div>{{ form.ssid.label_tag }}{{ form.ssid }}</div>
+                    <div>{{ form.password.label_tag }}{{ form.password }}</div>
+                </div>
+                <div>
+                    <div>{{ form.insert_template.label_tag }}{{ form.insert_template }}</div>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
