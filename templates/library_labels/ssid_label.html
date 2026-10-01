@@ -1,0 +1,27 @@
+{% extends './_base.html' %}
+{% block body %}
+	<div id="image">
+		<img src='data:image/png;base64,{{ ssid_image }}' style="max-width:100%"	>
+	</div>
+
+        <div id="div_form_">
+            <form method="post">
+                {{ form.media }}
+                {{ form.errors }}
+                {% csrf_token %}
+			<div id="div_ssid_text"><label for="id_ssid_text">ssid_text</label>{{ form.ssid_text }}</div> 
+			<div id="div_password_text"><label for="id_password_text">password_</label>{{ form.password_text }}</div>
+			<div id="div_notice1_text"><label for="id_notice1_text">notice line 1</label>{{ form.notice1_text }}</div>
+			<div id="div_notice2_text"><label for="id_notice2_text">notice_line 2</label>{{ form.notice2_text }}</div>
+			<div id="div_ssid_fontsize"><label for="id_ssid_fontsize">ssid_fontsize</label>{{ form.ssid_fontsize }}</div>
+			<div id="div_ssid_fontfamily"><label for="id_ssid_fontfamily">ssid_fontfamily</label>{{ form.ssid_fontfamily }}</div>
+			<div id="div_password_fontsize"><label for="id_password_fontsize">password_fontsize</label>{{ form.password_fontsize }}</div>
+			<div id="div_password_fontfamily"><label for="id_password_fontfamily">password_fontfamily</label>{{ form.password_fontfamily }}</div>
+			<div id="div_notice1_fontsize"><label for="id_notice1_fontsize">notice_fontsize</label>{{ form.notice1_fontsize }}</div>
+			<div id="div_notice1_fontfamily"><label for="id_notice1_fontfamily">notice_fontfamily</label>{{ form.notice1_fontfamily }}</div>
+			<div id="div_notice2_fontsize"><label for="id_notice2_fontsize">notice_fontsize</label>{{ form.notice2_fontsize }}</div>
+			<div id="div_notice2_fontfamily"><label for="id_notice2_fontfamily">notice_fontfamily</label>{{ form.notice2_fontfamily }}</div>
+                    <button type="submit">Submit</button>
+            </form>
+        </div>
+	{% endblock %}

@@ -23,11 +23,25 @@ class BarcodeForm(forms.Form):
     barcode_width = forms.IntegerField(label="Barcode width",initial="2800")
     barcode_fontsize = forms.IntegerField(label="Barcode size",initial="128")
     barcode_fontfamily = forms.CharField(label="Barcode family", max_length=60, initial="LiberationSans-Regular.ttf")
-    above_bar1_fontsize = forms.IntegerField(label="Text line 1 size",initial="96")
-    above_bar2_fontsize = forms.IntegerField(label="Text line 2 size",initial="96")
+    above_bar1_fontsize = forms.IntegerField(label="Text line 1 size",initial=96)
+    above_bar2_fontsize = forms.IntegerField(label="Text line 2 size",initial=96)
     above_bar1_fontfamily = forms.CharField(label="Text line family", max_length=60, initial="LiberationSans-Bold.ttf")
     above_bar2_fontfamily = forms.CharField(label="Text line family", max_length=60, initial="LiberationSans-Bold.ttf")
 
+
+class SSIDForm(forms.Form):
+   ssid_text = forms.CharField(label="SSID", max_length=30)
+   password_text = forms.CharField(label="Password", max_length=30)
+   notice1_text = forms.CharField(label="Notice(line 1)", max_length=30, initial="Return with case,")
+   notice2_text = forms.CharField(label="Notice(line 2)", max_length=30, initial="charger, and cable")
+   ssid_fontsize = forms.IntegerField(label="SSID Font Size", initial=96)
+   ssid_fontfamily = forms.CharField(label="SSID Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
+   password_fontsize = forms.IntegerField(label="Password Font Size", initial=96)
+   password_fontfamily = forms.CharField(label="Password Font Family", max_length=30, initial="LiberationSans-Bold.ttf")
+   notice1_fontsize = forms.IntegerField(label="Notice(line 1) Font Size", initial=96)
+   notice1_fontfamily = forms.CharField(label="Notice(line 1) Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
+   notice2_fontsize = forms.IntegerField(label="Notice(line 2) Font Size", initial=96)
+   notice2_fontfamily = forms.CharField(label="Notice(line 2) Font Family", max_length=30, initial="LibrationSans-Regular.ttf")
 
 class InsertTemplateForm(forms.ModelForm):
     class Meta:

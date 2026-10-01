@@ -5,11 +5,153 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 import base64
 
-from .forms import BarcodeForm
+from .forms import BarcodeForm, SSIDForm
 
 from django.views.generic import FormView,CreateView,DetailView
 
-def make_barcode_sticker(
+
+def make_ssid_label(
+            ssid_text,
+            password_text,
+            notice1_text,
+            notice2_text,
+            ssid_fontsize,
+            ssid_fontfamily,
+            password_fontsize,
+            password_fontfamily,
+            notice1_fontsize,
+            notice1_fontfamily,
+            notice2_fontsize,
+            notice2_fontfamily,
+):
+
+        ssid_y=0
+        img_height = ssid_fontsize + password_fontsize
+        if notice1_text > "":
+            img_height = img_height + notice1_fontsize
+        if notice2_text > "":
+            img_height = img_height + notice2_fontsize
+
+        init_img_width = 10000
+
+        init_img = Image.new("RGB", (init_img_width, img_height),"#ffffff")
+
+        init_draw = ImageDraw.Draw(init_img)
+
+
+        try:
+            font_ssid_text = ImageFont.truetype(ssid_fontfamily, size=ssid_fontsize)
+        except IOError:
+            font_ssid_text = ImageFont.load_default()
+
+        bbox = init_draw.textbbox((0,0), ssid_text, font=font_ssid_text)
+        ssid_width=bbox[2] - bbox[0]
+
+        try:
+            font_password_text = ImageFont.truetype(password_fontfamily, size=password_fontsize)
+        except IOError:
+            font_password_text = ImageFont.load_default()
+
+        bbox = init_draw.textbbox((0,0), password_text, font=font_password_text)
+        password_width=bbox[2] - bbox[0]
+
+        if notice1_text > "":
+            try:
+                font_notice1_text = ImageFont.truetype(notice1_fontfamily, size=notice1_fontsize)
+            except IOError:
+                font_notice1_text = ImageFont.load_default()
+
+            bbox = init_draw.textbbox((0,0), notice1_text, font=font_notice1_text)
+            notice1_width=bbox[2] - bbox[0]
+        else:
+            notice1_width = 0
+
+        if notice2_text > "":
+            try:
+                font_notice2_text = ImageFont.truetype(notice2_fontfamily, size=notice2_fontsize)
+            except IOError:
+                font_notice2_text = ImageFont.load_default()
+
+            bbox = init_draw.textbbox((0,0), notice2_text, font=font_notice2_text)
+            notice2_width=bbox[2] - bbox[0]
+        else:
+            notice2_width = 0
+
+
+        img_width = max(ssid_width, password_width, notice1_width, notice2_width)
+
+
+##########
+
+        img = Image.new("RGB", (img_width, img_height),"#ffffff")
+
+        draw = ImageDraw.Draw(img)
+
+        text_y = ssid_fontsize
+
+        try:
+            font_ssid_text = ImageFont.truetype(ssid_fontfamily, size=ssid_fontsize)
+        except IOError:
+            font_ssid_text = ImageFont.load_default()
+
+        bbox = draw.textbbox((0,0), ssid_text, font=font_ssid_text)
+        text_width=bbox[2] - bbox[0]
+
+        text_x = (img_width - text_width) // 2
+
+        draw.text((text_x, text_y ), ssid_text, fill="black", font=font_ssid_text, align="center")
+
+        text_y = text_y + password_fontsize
+
+        try:
+            font_password_text = ImageFont.truetype(password_fontfamily, size=password_fontsize)
+        except IOError:
+            font_password_text = ImageFont.load_default()
+
+        bbox = draw.textbbox((0,0), password_text, font=font_password_text)
+        text_width=bbox[2] - bbox[0]
+
+        text_x = (img_width - text_width) // 2
+
+        draw.text((text_x, text_y ), password_text, fill="black", font=font_password_text, align="center")
+
+        if notice1_text > "":
+            text_y = text_y + notice1_fontsize
+
+            try:
+                font_notice1_text = ImageFont.truetype(notice1_fontfamily, size=notice1_fontsize)
+            except IOError:
+                font_notice1_text = ImageFont.load_default()
+
+            bbox = draw.textbbox((0,0), notice1_text, font=font_notice1_text)
+            text_width=bbox[2] - bbox[0]
+
+            text_x = (img_width - text_width) // 2
+
+            draw.text((text_x, text_y ), notice1_text, fill="black", font=font_notice1_text, align="center")
+
+        if notice2_text > "":
+            text_y = text_y + notice2_fontsize
+
+            try:
+                font_notice2_text = ImageFont.truetype(notice2_fontfamily, size=notice2_fontsize)
+            except IOError:
+                font_notice2_text = ImageFont.load_default()
+
+            bbox = draw.textbbox((0,0), notice2_text, font=font_notice2_text)
+            text_width=bbox[2] - bbox[0]
+
+            text_x = (img_width - text_width) // 2
+
+            draw.text((text_x, text_y ), notice2_text, fill="black", font=font_notice2_text, align="center")
+
+        byio = BytesIO()
+        img.save(byio, format="jpeg")
+        img_data=byio.getvalue()
+
+        return(img_data)
+
+def make_barcode_label(
             barcode_number,
             show_barcode_number,
             show_startstop,
@@ -162,17 +304,17 @@ def make_barcode_sticker(
 
         return(img_data)
 
-class BarcodeStickerCreate(FormView):
+class BarcodeLabelCreate(FormView):
 
 
     form_class = BarcodeForm
-    template_name = 'library_labels/barcode_sticker.html'
+    template_name = 'library_labels/barcode_label.html'
 
     def form_valid(self, form):
 
         clean_data = form.cleaned_data
 
-        barcode_sticker_data = make_barcode_sticker(
+        barcode_label_data = make_barcode_label(
             clean_data["barcode_number"],
             clean_data["show_barcode_number"],
             clean_data["show_startstop"],
@@ -191,7 +333,7 @@ class BarcodeStickerCreate(FormView):
 
         )
 
-        codabar_image = base64.standard_b64encode(barcode_sticker_data).decode("utf-8")
+        codabar_image = base64.standard_b64encode(barcode_label_data).decode("utf-8")
 
 
         context_data = self.get_context_data()
@@ -213,6 +355,54 @@ class BarcodeStickerCreate(FormView):
         context_data["above_bar2_fontsize"] = clean_data["above_bar2_fontsize"]
         context_data["above_bar1_fontfamily"] = clean_data["above_bar1_fontfamily"]
         context_data["above_bar2_fontfamily"] = clean_data["above_bar2_fontfamily"]
+
+        return render( self.request, self.template_name, context_data )
+
+
+class SSIDLabelCreate(FormView):
+
+
+    form_class = SSIDForm
+    template_name = 'library_labels/ssid_label.html'
+
+    def form_valid(self, form):
+
+        clean_data = form.cleaned_data
+
+        ssid_label_data = make_ssid_label(
+            clean_data["ssid_text"],
+            clean_data["password_text"],
+            clean_data["notice1_text"],
+            clean_data["notice2_text"],
+            clean_data["ssid_fontsize"],
+            clean_data["ssid_fontfamily"],
+            clean_data["password_fontsize"],
+            clean_data["password_fontfamily"],
+            clean_data["notice1_fontsize"],
+            clean_data["notice1_fontfamily"],
+            clean_data["notice2_fontsize"],
+            clean_data["notice2_fontfamily"],
+        )
+
+        ssid_image = base64.standard_b64encode(ssid_label_data).decode("utf-8")
+
+
+        context_data = self.get_context_data()
+        context_data["form"] = form
+        context_data["ssid_image"] = ssid_image
+        context_data["ssid_text"] = clean_data["ssid_text"]
+        context_data["password_text"] = clean_data["password_text"]
+        context_data["notice1_text"] = clean_data["notice1_text"]
+        context_data["notice2_text"] = clean_data["notice2_text"]
+        context_data["ssid_fontsize"] = clean_data["ssid_fontsize"]
+        context_data["ssid_fontfamily"] = clean_data["ssid_fontfamily"]
+        context_data["password_fontsize"] = clean_data["password_fontsize"]
+        context_data["password_fontfamily"] = clean_data["password_fontfamily"]
+        context_data["notice1_fontsize"] = clean_data["notice1_fontsize"]
+        context_data["notice1_fontfamily"] = clean_data["notice1_fontfamily"]
+        context_data["notice2_fontsize"] = clean_data["notice2_fontsize"]
+        context_data["notice2_fontfamily"] = clean_data["notice2_fontfamily"]
+
 
         return render( self.request, self.template_name, context_data )
 
