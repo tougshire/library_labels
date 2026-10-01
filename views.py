@@ -31,7 +31,7 @@ def make_ssid_label(
             img_height = img_height + notice1_fontsize
         if notice2_text > "":
             img_height = img_height + notice2_fontsize
-        img_height = img_height * 10 
+        img_height = img_height + 10 
 
         init_img_width = 10000
 
