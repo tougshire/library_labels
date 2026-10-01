@@ -41,7 +41,7 @@ class SSIDForm(forms.Form):
    notice1_fontsize = forms.IntegerField(label="Notice(line 1) Font Size", initial=96)
    notice1_fontfamily = forms.CharField(label="Notice(line 1) Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
    notice2_fontsize = forms.IntegerField(label="Notice(line 2) Font Size", initial=96)
-   notice2_fontfamily = forms.CharField(label="Notice(line 2) Font Family", max_length=30, initial="LibrationSans-Regular.ttf")
+   notice2_fontfamily = forms.CharField(label="Notice(line 2) Font Family", max_length=30, initial="LiberationSans-Regular.ttf")
 
 class InsertTemplateForm(forms.ModelForm):
     class Meta:
