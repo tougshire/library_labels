@@ -1,0 +1,21 @@
+<div class="menu app-menu">
+  {% if 'barcode' in request.resolver_match.url_name %}
+  <div class="menu-item menu-here">
+        <a href="{% url 'library_labels:barcode-create' %}">Barcodes</a>
+      </div>
+    {% else %}
+      <div class="menu-item">
+        <a href="{% url 'library_labels:barcode-create' %}">Barcodes</a>
+      </div>
+  {% endif %}
+  {% if 'ssid' in request.resolver_match.url_name %}
+  <div class="menu-item menu-here">
+        <a href="{% url 'library_labels:ssid-create' %}">SSIDs</a>
+      </div>
+    {% else %}
+      <div class="menu-item">
+        <a href="{% url 'library_labels:ssid-create' %}">SSIDs</a>
+      </div>
+  {% endif %}
+
+</div>
