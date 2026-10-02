@@ -1,8 +1,16 @@
 from django import forms
 from django.urls import reverse_lazy
 
+from django.conf import settings
+
 from touglates.widgets import TouglatesRelatedSelect
 from .models import InsertTemplate
+
+def get_label_initial(name, default=None):
+    try:
+        return settings.LIBRARY_LABELS["initials"][name]
+    except(AttributeError, KeyError):
+        return default
 
 class BarcodeForm(forms.Form):
     CODE_CHOICES=[
@@ -13,20 +21,20 @@ class BarcodeForm(forms.Form):
     ]
 
     barcode_number = forms.CharField(label="barcode")
-    show_barcode_number = forms.BooleanField(label="show barcode", required=False, initial=True )
-    show_startstop = forms.BooleanField(label="show start/stop", required=False, initial=False )
-    start_code = forms.ChoiceField(label="start_code", choices=CODE_CHOICES, initial="A")
-    stop_code = forms.ChoiceField(label="stop_code", choices=CODE_CHOICES, initial="B")
-    above_bar1_text = forms.CharField(label="Text line 1", max_length=60, required=False, initial="SUFFOLK PUBLIC LIBRARY")
-    above_bar2_text = forms.CharField(label="Text line 2", max_length=60, initial="SUFFOLK, VA")
-    barcode_height = forms.IntegerField(label="Barcode height",initial="400")
-    barcode_width = forms.IntegerField(label="Barcode width",initial="2800")
-    barcode_fontsize = forms.IntegerField(label="Barcode size",initial="128")
-    barcode_fontfamily = forms.CharField(label="Barcode family", max_length=60, initial="LiberationSans-Regular.ttf")
-    above_bar1_fontsize = forms.IntegerField(label="Text line 1 size",initial=96)
-    above_bar2_fontsize = forms.IntegerField(label="Text line 2 size",initial=96)
-    above_bar1_fontfamily = forms.CharField(label="Text line family", max_length=60, initial="LiberationSans-Bold.ttf")
-    above_bar2_fontfamily = forms.CharField(label="Text line family", max_length=60, initial="LiberationSans-Bold.ttf")
+    show_barcode_number = forms.BooleanField(label="show barcode", required=False, initial=get_label_initial('barcode_show_barcode_number', True ))
+    show_startstop = forms.BooleanField(label="show start/stop", required=False, initial=get_label_initial('barcode_show_startstop', False ))
+    start_code = forms.ChoiceField(label="start_code", choices=CODE_CHOICES, initial=get_label_initial("barcode_start_code", "A" ))
+    stop_code = forms.ChoiceField(label="stop_code", choices=CODE_CHOICES, initial=get_label_initial("barcode_stop_code", "B" ))
+    above_bar1_text = forms.CharField(label="Text line 1", max_length=60, required=False, initial=get_label_initial("barcode_above_bar1_text", "" ))
+    above_bar2_text = forms.CharField(label="Text line 2", max_length=60, initial=get_label_initial("barcode_above_bar2_text", "" ))
+    barcode_height = forms.IntegerField(label="Barcode height",initial=get_label_initial("barcode_barcode_height", 400 ))
+    barcode_width = forms.IntegerField(label="Barcode width",initial=get_label_initial("barcode_barcode_width", 2800 ))
+    barcode_fontsize = forms.IntegerField(label="Barcode size",initial=get_label_initial("barcode_barcode_fontsize", 128 ))
+    barcode_fontfamily = forms.CharField(label="Barcode family", max_length=60, initial=get_label_initial("barcode_barcode_fontfamily", "LiberationSans-Regular.ttf" ))
+    above_bar1_fontsize = forms.IntegerField(label="Text line 1 size",initial=get_label_initial("barcode_above_bar1_fontsize", 96 ))
+    above_bar1_fontfamily = forms.CharField(label="Text line family", max_length=60, initial=get_label_initial("barcode_above_bar1_fontfamily", "LiberationSans-Bold.ttf" ))
+    above_bar2_fontsize = forms.IntegerField(label="Text line 2 size",initial=get_label_initial("barcode_above_bar2_fontsize", 96 ))
+    above_bar2_fontfamily = forms.CharField(label="Text line family", max_length=60, initial=get_label_initial("barcode_above_bar2_fontfamily", "LiberationSans-Bold.ttf" ))
 
 
 class SSIDForm(forms.Form):
