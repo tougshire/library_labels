@@ -3,6 +3,8 @@
 	{% if ssid_image %}
 	<div id="image">
 		<img src='data:image/png;base64,{{ ssid_image }}' style="max-width:100%">
+	</div>
+	<div>
 		<a href='data:image/png;base64,{{ ssid_image }}' download="{{ download_name }}">download</a>
 	</div>
 	{% endif %}
