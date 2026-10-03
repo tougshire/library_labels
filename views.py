@@ -191,7 +191,6 @@ def make_barcode_label(
         if above_bar2_text > "":
             img_height=img_height + above_bar2_fontsize
             barcode_y = barcode_y + above_bar2_fontsize
-        show_startstop=False
 
         barcode_data = start_code + barcode_number.replace(" ","") + stop_code
 
