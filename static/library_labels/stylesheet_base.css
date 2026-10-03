@@ -108,18 +108,41 @@ div.separator {
     min-height: .25in;
 }
 
-#div_form {
-    margin-top:1in;
+div.form {
 }
-form > div {
+
+div.form form > div {
     display:flex;
 }
-form > div > div {
-    padding-right:1em;
+
+div.form form > div label {
+    width:15%;
+    margin:auto 1rem;
 }
+
+div.form form input {
+	width:30rem;
+}
+
 
 @media print {
     #div_form {
         display:none;
     }
+}
+div.result {
+	margin:1rem;
+}
+div.download-link {
+	width:40%;
+	margin:1rem auto;
+	text-align:center;
+}
+a.download-link  {
+	text-align:center;
+	border:1px solid black;
+	border-radius: 1rem;
+	padding:.3rem;
+	margin: 1rem;
+	text-decoration: none;
 }

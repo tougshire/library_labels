@@ -1,36 +1,36 @@
 {% extends 'library_labels/_base.html' %}
 
 {% block content %}
-	{% if codabar_image %}
-	<div id="image">
+{% if codabar_image  %}
+	<div id="image" class="result">
 		<img src='data:image/png;base64,{{ codabar_image }}' style="max-width:100%">
 	</div>
-	<div style="border:1px solid black; margin:1em; margin-bottom:2em">
+	<div class="download-link" >
 		<a href='data:image/png;base64,{{ codabar_image }}' download="{{ download_name }}">download</a>
 	</div>
 	{% endif %}
 
-        <div id="div_form_">
+        <div id="div_form" class="form">
             <form method="post">
                 {{ form.media }}
                 {{ form.errors }}
                 {% csrf_token %}
-			<div id="div_barcode_number"><label for="id_barcode_number">barcode_number</label>{{ form.barcode_number }}</div> 
-			<div id="div_start_code"><label for="id_start_code">start_code</label>{{ form.start_code }}</div>
-			<div id="div_stop_code"><label for="id_stop_code">stop_code</label>{{ form.stop_code }}</div>
-			<div id="div_above_bar1_text"><label for="id_above_bar1_text">above_bar1_text</label>{{ form.above_bar1_text }}</div>
-			<div id="div_above_bar2_text"><label for="id_above_bar2_text">above_bar2_text</label>{{ form.above_bar2_text }}</div>
-			<div id="div_barcode_height"><label for="id_barcode_height">barcode_height</label>{{ form.barcode_height }}</div>
-			<div id="div_barcode_width"><label for="id_barcode_width">barcode_width</label>{{ form.barcode_width }}</div>
-			<div id="div_show_barcode_number"><label for="id_show_barcode_number">show_barcode_number</label>{{ form.show_barcode_number }}</div>
-			<div id="div_show_startstop"><label for="id_show_startstop">show_startstop</label>{{ form.show_startstop }}</div>
-			<div id="div_barcode_fontsize"><label for="id_barcode_fontsize">barcode_fontsize</label>{{ form.barcode_fontsize }}</div>
-			<div id="div_barcode_fontfamily"><label for="id_barcode_fontfamily">barcode_fontfamily</label>{{ form.barcode_fontfamily }}</div>
-			<div id="div_above_bar1_fontsize"><label for="id_above_bar1_fontsize">above_bar1_fontsize</label>{{ form.above_bar1_fontsize }}</div>
-			<div id="div_above_bar2_fontsize"><label for="id_above_bar2_fontsize">above_bar2_fontsize</label>{{ form.above_bar2_fontsize }}</div>
-			<div id="div_above_bar1_fontfamily"><label for="id_above_bar1_fontfamily">above_bar1_fontfamily</label>{{ form.above_bar1_fontfamily }}</div>
-			<div id="div_above_bar2_fontfamily"><label for="id_above_bar2_fontfamily">above_bar2_fontfamily</label>{{ form.above_bar2_fontfamily }}</div>
-                    <button type="submit">Submit</button>
+			<div id="div_barcode_number"><label for="id_barcode_number">Barcode Number</label>{{ form.barcode_number }}</div> 
+			<div id="div_start_code"><label for="id_start_code">Start Code</label>{{ form.start_code }}</div>
+			<div id="div_stop_code"><label for="id_stop_code">Stop Code</label>{{ form.stop_code }}</div>
+			<div id="div_above_bar1_text"><label for="id_above_bar1_text">Above Bar Line 1</label>{{ form.above_bar1_text }}</div>
+			<div id="div_above_bar2_text"><label for="id_above_bar2_text">Above Bar Line 2</label>{{ form.above_bar2_text }}</div>
+			<div id="div_barcode_height"><label for="id_barcode_height">barcode height</label>{{ form.barcode_height }}</div>
+			<div id="div_barcode_width"><label for="id_barcode_width">barcode width</label>{{ form.barcode_width }}</div>
+			<div id="div_show_barcode_number"><label for="id_show_barcode_number">show number</label>{{ form.show_barcode_number }}</div>
+			<div id="div_show_startstop"><label for="id_show_startstop">show startstop</label>{{ form.show_startstop }}</div>
+			<div id="div_barcode_fontsize"><label for="id_barcode_fontsize">barcode fontsize</label>{{ form.barcode_fontsize }}</div>
+			<div id="div_barcode_fontfamily"><label for="id_barcode_fontfamily">barcode fontfamily</label>{{ form.barcode_fontfamily }}</div>
+			<div id="div_above_bar1_fontsize"><label for="id_above_bar1_fontsize">above bar1 fontsize</label>{{ form.above_bar1_fontsize }}</div>
+			<div id="div_above_bar2_fontsize"><label for="id_above_bar2_fontsize">above bar2 fontsize</label>{{ form.above_bar2_fontsize }}</div>
+			<div id="div_above_bar1_fontfamily"><label for="id_above_bar1_fontfamily">above bar1 fontfamily</label>{{ form.above_bar1_fontfamily }}</div>
+			<div id="div_above_bar2_fontfamily"><label for="id_above_bar2_fontfamily">above bar2 fontfamily</label>{{ form.above_bar2_fontfamily }}</div>
+			<div id="div_submit"><label for="submit"> </label><button type="submit">Submit</button></div>
             </form>
         </div>
 	{% endblock %}

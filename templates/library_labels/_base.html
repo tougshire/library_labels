@@ -6,9 +6,9 @@
 <head>
 <title>Library Technical Inventory</title>
 <script src="{% static 'touglates/touglates.js' %}"></script>
-{% block head_stylesheet %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'libtekin256/libtekin256.css' %}">
+{% block head_stylesheet %}
+<link rel="stylesheet" href="{% static 'library_labels/stylesheet_base.css' %}">
 {% project_include_file 'main_css' as cssfile %}
 {% if cssfile %}<link rel="stylesheet" href="{% static cssfile %}">{% endif %}
 {% endblock %}
